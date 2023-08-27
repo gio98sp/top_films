@@ -1,22 +1,29 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
 
-const inter = Inter({ subsets: ['latin'] })
+import { Header } from '@/components/Header';
+import { Search } from '@/components/Search';
+import { Footer } from '@/components/Footer';
+
+import './globals.css';
+
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Top Films',
-  description: 'Busque os melhores Filmes e Séries para assistir',
-}
+  description: 'Conheça os melhores Filmes e Séries',
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header />
+        <Search />
+        {children}
+        <Footer />
+      </body>
     </html>
-  )
+  );
 }
