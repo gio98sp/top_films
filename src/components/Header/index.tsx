@@ -58,11 +58,6 @@ export const Header = () => {
                 </div>
               )}
             </li>
-            <li>
-              <Link className="hidden sm:flex text-lg" href={'/'}>
-                Sobre
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>
