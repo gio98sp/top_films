@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function Details({
-  params,
-}: {
-  params: { id: [id: number, category: string] };
-}) {
+interface IDetailsProps {
+  params: {
+    id: [id: number, category: string];
+  };
+}
+
+export default async function Details({ params }: IDetailsProps) {
   const [id, category] = params.id;
 
   const options = {
@@ -31,6 +33,7 @@ export default async function Details({
             <Image
               className="flex flex-1 rounded-t-xl w-full"
               src={`${process.env.API_URL_IMAGES}/original${data.backdrop_path}`}
+              priority
               width={500}
               height={500}
               alt="imagem do filme"
@@ -83,7 +86,11 @@ export default async function Details({
               ) : (
                 <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
                   <p>Último episódio</p>
-                  <p>{data.last_air_date ? new Date(data.last_air_date).toLocaleDateString() : 'Não informado'}</p>
+                  <p>
+                    {data.last_air_date
+                      ? new Date(data.last_air_date).toLocaleDateString()
+                      : 'Não informado'}
+                  </p>
                 </div>
               )}
 
