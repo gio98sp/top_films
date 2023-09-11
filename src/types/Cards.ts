@@ -1,4 +1,5 @@
 export interface ICardsProps {
-  category: 'movie' | 'tv';
-  subCategory: 'top_rated' | 'popular';
+  category: 'movie' | 'tv' | 'trending' | 'search';
+  subCategory?: 'top_rated' | 'popular';
+  query?: string
 }

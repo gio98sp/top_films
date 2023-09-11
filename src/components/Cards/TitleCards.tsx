@@ -1,6 +1,6 @@
 import { ICardsProps } from '@/types/Cards';
 
-export const TitleCards = ({ category, subCategory }: ICardsProps) => {
+export const TitleCards = ({ category, subCategory, query }: ICardsProps) => {
 
   let title
 
@@ -15,6 +15,12 @@ export const TitleCards = ({ category, subCategory }: ICardsProps) => {
   }
   if(subCategory === 'top_rated' && category === 'tv') {
     title = 'Séries melhores Avaliados'
+  }
+  if(category === 'trending') {
+    title = 'Melhores da semana'
+  }
+  if(category === 'search') {
+    title = query
   }
 
   return <h2 className="text-2xl text-primary bg-third p-4 text-center">{title}</h2>;

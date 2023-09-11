@@ -1,31 +1,20 @@
+import { getDetails } from '@/services/getTmdbApi';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface IDetailsProps {
   params: {
-    id: [id: number, category: string];
+    id: [id: number];
   };
 }
 
 export default async function Details({ params }: IDetailsProps) {
-  const [id, category] = params.id;
+  const [id] = params.id;
 
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `${process.env.TOKEN_TMDB}`,
-    },
-  };
-
-  const res = await fetch(`${process.env.API_URL}/${category}/${id}?language=pt-br`, options);
-  const data = await res.json();
+  const data = await getDetails(id)
 
   return (
     <div className="max-w-screen-xl m-auto mb-16 md:mb-24 px-5 sm:px-7 flex flex-col gap:16 md:gap-24">
-      <h2 className="text-2xl text-primary bg-third p-4 text-center">
-        {data.title || data.name}
-      </h2>
+      <h2 className="text-2xl text-primary bg-third p-4 text-center">{data.title || data.name}</h2>
 
       <div className="flex flex-wrap justify-evenly items-center gap-5 gap-y-8 md:gap-12">
         {data.poster_path && (
@@ -33,14 +22,13 @@ export default async function Details({ params }: IDetailsProps) {
             <Image
               className="flex flex-1 rounded-t-xl w-full"
               src={`${process.env.API_URL_IMAGES}/original${data.backdrop_path}`}
-              priority
               width={500}
               height={500}
               alt="imagem do filme"
             />
 
             <div className="flex justify-center items-center border-2 border-primary absolute bg-black font-bold text-md w-[40px] h-[40px] top-0 right-0 transform translate-x-1/2 -translate-y-1/2 rounded-full">
-              {data.vote_average.toFixed(1)}
+              {Number(data.vote_average).toFixed(1)}
             </div>
 
             <p className="border-t-2 border-t-primary p-6 w-full text-center text-lg font-bold">
@@ -52,7 +40,7 @@ export default async function Details({ params }: IDetailsProps) {
             </p>
 
             <div className="flex gap-6 justify-between bg-black rounded-b-xl">
-              {data.budget >= 0 ? (
+              {Number(data.budget) >= 0 ? (
                 <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
                   <p>Orçamento</p>
                   <p>

@@ -1,16 +1,9 @@
-import { Cards } from '@/components/Home/Cards';
+import { Cards } from '@/components/Cards/Cards';
 
 export default function Home() {
   return (
     <main>
-      <Cards
-        category="movie"
-        subCategory="popular"
-      />
-      {/* <Cards
-        category="tv"
-        subCategory="popular"
-      /> */}
+      <Cards category="trending" />
     </main>
   );
 }
