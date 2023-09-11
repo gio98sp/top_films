@@ -6,7 +6,7 @@ Buscador de filmes e séries feito com **NextJS** e a API da **TMDB**.
 
 Apenas para estudos e adquirir experiência na prática.
 
-Acesse o projeto aqui: [Top Films](https://chatgpt-clone-gio98sp.vercel.app/)
+Acesse o projeto aqui: [Top Films](https://top-films-gio98sp.vercel.app/)
 
 ## Executando o projeto
 
