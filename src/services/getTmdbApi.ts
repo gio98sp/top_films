@@ -6,7 +6,7 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: `${process.env.NEXT_PUBLIC_TOKEN_TMDB}`,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_TMDB}`,
   },
 };
 
