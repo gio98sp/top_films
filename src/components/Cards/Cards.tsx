@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { getMoviesOrSeries } from '@/services/getTmdbApi';
 
-import { TitleCards } from './TitleCards';
 import { Pagination } from './PaginationCards';
 
 interface ICardsProps {
@@ -15,11 +14,12 @@ interface ICardsProps {
 
 export const Cards = async ({ category, subCategory, query, page }: ICardsProps) => {
   const data = await getMoviesOrSeries({ category, subCategory, query, page });
+  console.log(data)
 
   return (
-    <div className="max-w-screen-xl m-auto mb-16 md:mb-24 px-5 sm:px-7 flex flex-col gap-16 md:gap-24">
-      <TitleCards category={category} subCategory={subCategory} query={query} />
-
+    <>
+    {data.total_results ? (
+      <div className="flex flex-col gap-16 md:gap-24">
       <div className="flex flex-wrap justify-evenly items-center gap-5 gap-y-8 md:gap-12">
         {data.results.map(
           (item: any, index: number) =>
@@ -43,7 +43,7 @@ export const Cards = async ({ category, subCategory, query, page }: ICardsProps)
                   <p className="border-t-2 border-t-primary p-1 min-h-[80px] w-full text-center overflow-hidden text-ellipsis leading-tight">
                     {item.title || item.name}
                   </p>
-                  
+
                   <p className="flex justify-center items-center rounded-b-xl text-black bg-primary border-t-2 border-t-primary font-bold min-h-[30px]">
                     {new Date(item.release_date || item.first_air_date).toLocaleDateString('pt-BR')}
                   </p>
@@ -55,5 +55,9 @@ export const Cards = async ({ category, subCategory, query, page }: ICardsProps)
 
       <Pagination currentPage={page} totalPages={data?.total_pages} />
     </div>
+    ) : (
+      <div className='h-60 text-2xl text-primary flex justify-center items-center'>Nada encontrado...</div>
+    )}
+    </>
   );
 };

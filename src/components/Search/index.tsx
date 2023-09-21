@@ -8,12 +8,14 @@ export const Search = () => {
   const router = useRouter();
 
   const onKeyEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if(e.code === 'Enter') handleSearch()
-  }
-  
+    if (query && e.code === 'Enter') handleSearch();
+  };
+
   const handleSearch = () => {
-    router.push(`/search?query=${query}`);
-    setQuery('');
+    if(query) {
+      router.push(`/search?query=${query}`);
+      setQuery('');
+    }
   };
 
   return (
@@ -28,7 +30,7 @@ export const Search = () => {
           name="search"
           placeholder="Busque por um Filme ou Série..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={e => setQuery(e.target.value)}
           onKeyDown={onKeyEnter}
         />
         <button className="bg-primary py-1.5 px-2 sm:px-6 rounded-r-full" onClick={handleSearch}>

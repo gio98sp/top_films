@@ -1,5 +1,6 @@
 import { getDetailsMoviesOrSeries } from '@/services/getTmdbApi';
 import Image from 'next/image';
+import Loading from './loading';
 
 interface IDetailsProps {
   params: {
@@ -13,12 +14,12 @@ export default async function Details({ params }: IDetailsProps) {
   const data = await getDetailsMoviesOrSeries(id);
 
   return (
-    <div className="max-w-screen-xl m-auto mb-16 md:mb-24 px-5 sm:px-7 flex flex-col gap:16 md:gap-24">
+    <div className="max-w-screen-xl m-auto mb-16 md:mb-24 px-5 sm:px-7 flex flex-col gap-16 md:gap-24">
       <h2 className="text-2xl text-primary bg-third p-4 text-center">{data.title || data.name}</h2>
 
       <div className="flex flex-wrap justify-evenly items-center gap-5 gap-y-8 md:gap-12">
         {data.poster_path && (
-          <div className="relative flex flex-col max-w-screen-lg rounded-2xl shadow-2xl shadow-third text-primary border-primary">
+          <div className="relative flex flex-col w-full lg:max-w-screen-lg rounded-2xl shadow-2xl shadow-third text-primary border-primary">
             <Image
               className="flex flex-1 rounded-t-xl w-full"
               src={`${process.env.API_URL_IMAGES}/original${data.backdrop_path}`}
@@ -39,9 +40,9 @@ export default async function Details({ params }: IDetailsProps) {
               {data.overview}
             </p>
 
-            <div className="flex gap-6 justify-between bg-black rounded-b-xl">
+            <div className="flex flex-col sm:flex-row flex-wrap text-sm md:text-base justify-center sm:justify-between bg-black rounded-b-xl">
               {Number(data.budget) >= 0 ? (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Orçamento</p>
                   <p>
                     {data.budget === 0
@@ -54,14 +55,14 @@ export default async function Details({ params }: IDetailsProps) {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Lançamento</p>
                   <p>{new Date(data.first_air_date).toLocaleDateString()}</p>
                 </div>
               )}
 
               {data.revenue ? (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Faturamento</p>
                   <p>
                     {data.revenue.toLocaleString('pt-BR', {
@@ -72,7 +73,7 @@ export default async function Details({ params }: IDetailsProps) {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Último episódio</p>
                   <p>
                     {data.last_air_date
@@ -83,19 +84,19 @@ export default async function Details({ params }: IDetailsProps) {
               )}
 
               {data.runtime && (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Duração</p>
                   <p>{data.runtime + 'min'}</p>
                 </div>
               )}
 
               {data.release_date ? (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Lançamento</p>
                   <p>{new Date(data.release_date).toLocaleDateString()}</p>
                 </div>
               ) : (
-                <div className="flex flex-col justify-center items-center p-6 text-primary font-bold">
+                <div className="flex flex-col justify-center items-center p-3 md:p-6 text-primary font-bold">
                   <p>Temporadas</p>
                   <p>{`${data.number_of_seasons} temp - ${data.number_of_episodes} eps`}</p>
                 </div>
