@@ -1,6 +1,10 @@
-import { ICardsProps } from '@/types/Cards';
+interface ITitleCardsProps {
+  category?: 'movie' | 'tv' | 'trending' | 'search';
+  subCategory?: 'top_rated' | 'popular';
+  query?: string
+}
 
-export const TitleCards = ({ category, subCategory, query }: ICardsProps) => {
+export const TitleCards = ({ category = 'trending', subCategory, query }: ITitleCardsProps) => {
 
   let title
 

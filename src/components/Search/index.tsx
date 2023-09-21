@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 export const Search = () => {
   const [query, setQuery] = useState('');
   const router = useRouter();
 
+  const onKeyEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if(e.code === 'Enter') handleSearch()
+  }
   
   const handleSearch = () => {
-    router.push(`/${query}`);
+    router.push(`/search?query=${query}`);
     setQuery('');
   };
 
@@ -26,7 +29,7 @@ export const Search = () => {
           placeholder="Busque por um Filme ou Série..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSearch}
+          onKeyDown={onKeyEnter}
         />
         <button className="bg-primary py-1.5 px-2 sm:px-6 rounded-r-full" onClick={handleSearch}>
           <svg

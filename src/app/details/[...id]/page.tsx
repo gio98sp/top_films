@@ -1,4 +1,4 @@
-import { getDetails } from '@/services/getTmdbApi';
+import { getDetailsMoviesOrSeries } from '@/services/getTmdbApi';
 import Image from 'next/image';
 
 interface IDetailsProps {
@@ -10,7 +10,7 @@ interface IDetailsProps {
 export default async function Details({ params }: IDetailsProps) {
   const [id] = params.id;
 
-  const data = await getDetails(id)
+  const data = await getDetailsMoviesOrSeries(id);
 
   return (
     <div className="max-w-screen-xl m-auto mb-16 md:mb-24 px-5 sm:px-7 flex flex-col gap:16 md:gap-24">

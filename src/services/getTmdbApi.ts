@@ -1,5 +1,3 @@
-import { IgetDetailsProps, IgetMoviesOrSeries, IgetMoviesOrSeriesProps } from '@/types/getTmdbApi';
-
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const options = {
@@ -10,7 +8,21 @@ const options = {
   },
 };
 
-export const getTmdbApi = async ({
+interface IgetMoviesOrSeriesProps {
+  category: 'movie' | 'tv' | 'trending' | 'search';
+  subCategory?: 'top_rated' | 'popular';
+  query?: string;
+  page: string;
+}
+
+export interface IgetMoviesOrSeries {
+  page: number;
+  results: object[];
+  total_pages: number;
+  total_results: number;
+}
+
+export const getMoviesOrSeries = async ({
   category,
   subCategory,
   query,
@@ -41,7 +53,11 @@ export const getTmdbApi = async ({
   return data;
 };
 
-export const getDetails = async (id: number): Promise<IgetDetailsProps> => {
+interface IgetDetailsMoviesOrSeries {
+  [key: string]: string | number;
+}
+
+export const getDetailsMoviesOrSeries = async (id: number): Promise<IgetDetailsMoviesOrSeries> => {
   let res = await fetch(`${baseUrl}/movie/${id}?language=pt-BR`, options);
   let data = await res.json();
 
