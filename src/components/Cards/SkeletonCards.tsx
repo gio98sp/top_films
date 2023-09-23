@@ -3,7 +3,7 @@ export const SkeletonCards = () => {
     <div className="flex flex-col gap-24 md:gap-24">
       <div className="flex flex-wrap justify-evenly items-center gap-5 gap-y-8 md:gap-12">
         {[...Array(18)].map((_, index) => (
-          <div key={index} className="relative flex flex-col bg-gray-600 w-[160px] rounded-2xl">
+          <div key={index} className="relative flex flex-col bg-gray-600 animate-pulse w-[160px] rounded-2xl">
             <div className="h-[220px] w-[160px] rounded-t-xl" />
 
             <div className="border-2 absolute border-black bg-gray-600 w-[40px] h-[40px] top-0 right-0 transform translate-x-1/2 -translate-y-1/2 rounded-full"></div>
